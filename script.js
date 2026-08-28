@@ -77,15 +77,28 @@ const PROJECTS = [
     year: '2026',
     body: 'End-to-end data platform, built solo. Prototyped and validated the pipeline design, then shipped a <b>Spark Structured Streaming (Scala)</b> job consuming a 6-partition <b>Kafka</b> topic with windowed aggregation, verified at <b>800 events/sec with zero data loss</b>. Modelled a star-schema warehouse in PostgreSQL with SQL analytics surfacing engagement and retention insights, and shipped an <b>ALS recommender</b> and churn classifier behind a live FastAPI feature endpoint — the full design-build-launch-iterate loop.',
     stack: ['Apache Kafka', 'Spark Structured Streaming', 'Scala', 'PostgreSQL', 'Python', 'FastAPI'],
-    links: []
+    links: [
+      { label: 'GitHub ↗', url: 'https://github.com/NidhiShree99/netflix-streaming-pipeline' }
+    ]
+  },
+  {
+    cat: ['ai'],
+    kind: 'AI / LLM · PRODUCT DECISIONS',
+    title: 'JobTriage — Autonomous Job Application Agent',
+    year: '2026',
+    body: 'Designed the product decision, not just the code: a 5-step agent that defines an explicit <b>autonomy boundary</b> for triaging job postings — deterministic auto-reject rules for hard disqualifiers, LLM-scored fit, and a <b>NEEDS_HUMAN_REVIEW</b> escalation path for ambiguous cases, so the system never guesses when it should ask a human instead. Validated against 5 test scenarios spanning disqualified to auto-apply fits.',
+    stack: ['Python', 'Claude API', 'Streamlit'],
+    links: [
+      { label: 'GitHub ↗', url: 'https://github.com/NidhiShree99/JobTriageAgent' }
+    ]
   },
   {
     cat: ['ai'],
     kind: 'AI / LLM · BUSINESS INTELLIGENCE',
     title: 'VizGen — AI-Powered Dashboard Builder',
     year: '2026',
-    body: 'Identified a recurring requirements bottleneck in enterprise BI workflows — business users could describe a need but never configure a chart — and shipped a <b>natural-language dashboard generator</b> end-to-end, solo. Prioritised and built a feature roadmap covering dashboard version control, <b>AI-generated executive summaries</b>, and no-login shareable URLs. Live in production.',
-    stack: ['Python', 'Claude API', 'Plotly', 'Streamlit', 'SQLite'],
+    body: 'Identified a recurring requirements bottleneck in enterprise BI workflows — business users could describe a need but never configure a chart — and shipped a <b>natural-language dashboard generator</b> end-to-end, solo. Prioritised and built a feature roadmap covering dashboard version control, <b>AI-generated executive summaries</b>, and no-login shareable URLs. Later implemented natural-language <b>time-series forecasting</b> using Claude for intent parsing and statsmodels (Holt-Winters exponential smoothing) for computation — deliberately decoupling LLM-driven query interpretation from deterministic statistical modelling to eliminate numerical hallucination risk in forecasted output. Live in production.',
+    stack: ['Python', 'Claude API', 'statsmodels', 'Plotly', 'Streamlit', 'SQLite'],
     links: [
       { label: 'GitHub ↗', url: 'https://github.com/NidhiShree99/vizgen' },
       { label: 'Live ↗', url: 'https://vizgenanalytics.streamlit.app' }
