@@ -64,7 +64,7 @@ const JOBS = [
     points: [
       'Graduate coursework in <b>Introduction to Artificial Intelligence</b>, <b>Introduction to Analytics</b> and <b>Database Design</b>, maintaining a <b>3.67 / 4.0</b> GPA.',
       'Building end-to-end data products alongside coursework — a Kafka + Spark Structured Streaming platform and an LLM-powered dashboard generator, both shipped solo.',
-      'Seeking <b>Spring 2027</b> and <b>Summer 2027 internships</b>, and <b>full-time roles from Summer 2027</b>, in Product Management, TPM, Data &amp; Business Analysis and Analytics Engineering.'
+      'Seeking <b>Summer 2027 internships</b> and <b>full-time roles from May 2027</b>, in Product Management, TPM, Data &amp; Business Analysis and Analytics Engineering.'
     ]
   }
 ];
@@ -231,12 +231,23 @@ const BOOT_MSGS = [
 
   const secs = [...document.querySelectorAll('main section[id]')];
   const anchors = [...links.querySelectorAll('a')];
-  addEventListener('scroll', () => {
+
+  function spy() {
     const y = scrollY + 140;
     let cur = '';
     secs.forEach(s => { if (s.offsetTop <= y) cur = s.id; });
+
+    // The last section sits too close to the bottom to ever clear that offset,
+    // so once the page is scrolled all the way down, pin the final nav link.
+    const atBottom = scrollY + innerHeight >= document.documentElement.scrollHeight - 2;
+    if (atBottom && anchors.length) cur = anchors[anchors.length - 1].getAttribute('href').slice(1);
+
     anchors.forEach(a => a.classList.toggle('on', a.getAttribute('href') === '#' + cur));
-  });
+  }
+
+  addEventListener('scroll', spy, { passive: true });
+  addEventListener('resize', spy);
+  spy();
 })();
 
 /* ── MARQUEE ──────────────────────────── */
