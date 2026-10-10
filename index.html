@@ -8,9 +8,12 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=JetBrains+Mono:wght@300;400;500;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="styles.css?v=5">
+<link rel="stylesheet" href="styles.css?v=7">
 </head>
 <body>
+
+<a class="skip-link" href="#about">Skip to content</a>
+<div class="scroll-progress" id="scrollProgress" aria-hidden="true"><i></i></div>
 
 <!-- ══════════ BOOT / LOADER ══════════ -->
 <div class="boot" id="boot">
@@ -43,10 +46,14 @@
     <a href="#about">ABOUT</a>
     <a href="#experience">EXPERIENCE</a>
     <a href="#projects">PROJECTS</a>
+    <a href="#system">SYSTEM</a>
     <a href="#skills">SKILLS</a>
     <a href="#hire">HIRE ME</a>
     <a href="#contact">CONTACT</a>
   </nav>
+  <button class="cmdk-btn mono" id="cmdkBtn" aria-label="Open command palette">
+    <span>Search</span><kbd>⌘K</kbd>
+  </button>
   <button class="theme-btn" id="themeBtn" aria-label="Toggle colour theme">☾</button>
   <button class="menu-btn" id="menuBtn" aria-label="Toggle menu"><span></span><span></span></button>
 </header>
@@ -160,19 +167,48 @@
   </div>
 </section>
 
-<!-- ══════════ 04 SKILLS ══════════ -->
-<section id="skills" class="sec alt">
+<!-- ══════════ 04 SYSTEM DESIGN ══════════ -->
+<section id="system" class="sec alt">
   <div class="wrap">
-    <p class="sec-label mono">04 — SKILLS</p>
+    <p class="sec-label mono">04 — SYSTEM DESIGN</p>
+    <h2 class="sec-title">How the pipeline runs</h2>
+    <p class="sys-intro">
+      The streaming platform from the project above, traced end to end. Events land on a
+      <b>6-partition Kafka topic</b>, a <b>Spark Structured Streaming</b> job aggregates them in
+      tumbling windows, results land in a <b>star-schema warehouse</b>, and a <b>FastAPI</b>
+      endpoint serves features to the recommender. Click any stage for detail.
+    </p>
+
+    <div class="sys-canvas-wrap">
+      <canvas id="pipeCanvas" role="img"
+        aria-label="Animated data pipeline: a 6-partition Kafka topic feeds a Spark Structured Streaming job, which writes to a PostgreSQL star-schema warehouse, which serves a FastAPI feature endpoint."></canvas>
+      <div class="sys-hud mono" id="sysHud">
+        <span><i class="dot"></i>STREAMING</span>
+        <span>events <b id="hudEvents">0</b></span>
+        <span>throughput <b id="hudRate">0</b>/s</span>
+        <span>loss <b class="ok" id="hudLoss">0.00%</b></span>
+      </div>
+      <button class="sys-toggle mono" id="sysToggle" aria-label="Pause animation">❚❚ PAUSE</button>
+    </div>
+
+    <div class="sys-stages" id="sysStages"></div>
+    <div class="sys-detail" id="sysDetail" aria-live="polite"></div>
+  </div>
+</section>
+
+<!-- ══════════ 05 SKILLS ══════════ -->
+<section id="skills" class="sec">
+  <div class="wrap">
+    <p class="sec-label mono">05 — SKILLS</p>
     <h2 class="sec-title">What I work with</h2>
     <div class="skill-grid" id="skillGrid"></div>
   </div>
 </section>
 
 <!-- ══════════ 05 EDUCATION ══════════ -->
-<section id="education" class="sec">
+<section id="education" class="sec alt">
   <div class="wrap">
-    <p class="sec-label mono">05 — EDUCATION</p>
+    <p class="sec-label mono">06 — EDUCATION</p>
     <h2 class="sec-title">Academic background</h2>
 
     <article class="edu">
@@ -200,9 +236,9 @@
 </section>
 
 <!-- ══════════ 06 BEYOND ══════════ -->
-<section id="beyond" class="sec alt">
+<section id="beyond" class="sec">
   <div class="wrap">
-    <p class="sec-label mono">06 — BEYOND THE DESK</p>
+    <p class="sec-label mono">07 — BEYOND THE DESK</p>
     <h2 class="sec-title">Beyond the desk</h2>
     <div class="beyond-grid">
       <article class="bcard"><span class="bicon">🎤</span><p class="mono dim">EXXONMOBIL IT TOASTMASTERS</p><h3>Vice President, Public Relations</h3><p>Led PR and communications for the club, growing participation and visibility across the IT organisation.</p></article>
@@ -214,9 +250,9 @@
 </section>
 
 <!-- ══════════ 07 CERTS ══════════ -->
-<section id="certs" class="sec">
+<section id="certs" class="sec alt">
   <div class="wrap">
-    <p class="sec-label mono">07 — CREDENTIALS</p>
+    <p class="sec-label mono">08 — CREDENTIALS</p>
     <h2 class="sec-title">Certifications</h2>
     <div class="cert-grid">
       <article class="cert cert-lead">
@@ -234,7 +270,7 @@
 <!-- ══════════ 08 HIRE ME CONSOLE ══════════ -->
 <section id="hire" class="sec console">
   <div class="wrap">
-    <p class="sec-label mono">08 — HIRE ME</p>
+    <p class="sec-label mono">09 — HIRE ME</p>
     <h2 class="sec-title">The Product is Me</h2>
     <p class="mono accent console-sub">// Product · Program · Data · Available Summer 2027</p>
 
@@ -253,12 +289,7 @@
 
       <div class="panel">
         <div class="panel-head mono">PERFORMANCE METRICS</div>
-        <div class="metrics">
-          <div><b data-count="45" data-suffix="%">0</b><span>Sprint velocity lift</span></div>
-          <div><b data-count="40" data-suffix="%">0</b><span>Backlog volume cut</span></div>
-          <div><b data-count="70" data-suffix="%">0</b><span>Manual reconciliation cut</span></div>
-          <div><b data-count="100" data-suffix="%">0</b><span>Audit findings closed</span></div>
-        </div>
+        <div class="bars" id="impactBars"></div>
       </div>
 
       <div class="panel">
@@ -330,8 +361,32 @@
 
 </main>
 
-<footer class="foot mono">NS · Madison, WI · MS Information Systems, UW–Madison</footer>
+<footer class="foot mono">
+  NS · Madison, WI · MS Information Systems, UW–Madison
+  <span class="foot-hint">Press <kbd>⌘K</kbd> to search</span>
+</footer>
 
-<script src="script.js?v=5"></script>
+<!-- ══════════ COMMAND PALETTE ══════════ -->
+<div class="cmdk" id="cmdk" hidden>
+  <div class="cmdk-backdrop" data-cmdk-close></div>
+  <div class="cmdk-panel" role="dialog" aria-modal="true" aria-label="Command palette">
+    <div class="cmdk-input-row">
+      <span class="mono accent" aria-hidden="true">&gt;</span>
+      <input id="cmdkInput" type="text" autocomplete="off" spellcheck="false"
+             placeholder="Jump to a section, project, or action…"
+             aria-label="Search sections, projects and actions"
+             aria-controls="cmdkList" aria-expanded="true" role="combobox">
+      <kbd>esc</kbd>
+    </div>
+    <ul class="cmdk-list" id="cmdkList" role="listbox" aria-label="Results"></ul>
+    <div class="cmdk-foot mono">
+      <span><kbd>↑</kbd><kbd>↓</kbd> navigate</span>
+      <span><kbd>↵</kbd> open</span>
+      <span><kbd>esc</kbd> close</span>
+    </div>
+  </div>
+</div>
+
+<script src="script.js?v=7"></script>
 </body>
 </html>
